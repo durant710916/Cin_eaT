@@ -1,0 +1,53 @@
+
+// User table code
+CREATE TABLE `user` (
+	`id` INT(8) NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(255) NOT NULL,
+	`password` VARCHAR(255) NOT NULL,
+	`name` TEXT NOT NULL,
+	`sex` TINYTEXT NOT NULL,
+	`birthday` DATE NOT NULL,
+	`age` INT(3) NOT NULL,
+	`phonenumber` VARCHAR(50) NOT NULL,
+	`email` VARCHAR(255) NOT NULL,
+	`address` TEXT NOT NULL,
+	PRIMARY KEY (`username`),
+	UNIQUE INDEX `id` (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=1
+;
+
+
+// Store table code
+CREATE TABLE `store_inform` (
+	`store_id` INT(8) NOT NULL AUTO_INCREMENT,
+	`storename` VARCHAR(255) NOT NULL,
+	`storephone` VARCHAR(50) NOT NULL,
+	`storeaddress` TEXT NOT NULL,
+	PRIMARY KEY (`store_id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=1
+;
+
+
+//COMMENT
+CREATE TABLE `comment` (
+	`id` INT(8) NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(255) NOT NULL,
+	`store_id` INT(8) NULL DEFAULT NULL,
+	`comment` LONGTEXT NOT NULL,
+	PRIMARY KEY (`id`),
+	INDEX `username` (`username`),
+	INDEX `store_id` (`store_id`),
+	CONSTRAINT `store_id` FOREIGN KEY (`store_id`) REFERENCES `store_inform` (`store_id`),
+	CONSTRAINT `username` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
