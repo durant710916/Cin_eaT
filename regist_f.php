@@ -29,11 +29,11 @@ if(isset($_POST['regist'])){
 					$query = $config->prepare($sql);
 					$result = $query->execute(array(':username'=>$username,':password'=>$password,':name'=>$name,':sex'=>$sex,':birthday'=>$birthday,':age'=>$age,':phonenumber'=>$phonenumber,':email'=>$email,':address'=>$address));
 						if($result){
-						echo "<script> alert('Your Are Now Log In!!!.'); window.location.assign('index.php');</script>";}
+						echo "<script> alert('親愛的貴賓，您現在可以登入了^_^!!.'); window.location.assign('index.php');</script>";}
 						else{
 						echo "The INSERT isn't work well. PLZ contact admin";}
 				}else{
-					echo "<script> alert('Your passwords do not match.'); window.location.assign('regist.php');</script>";}
+					echo "<script> alert('輸入的密碼與確認密碼不相同，請檢查是否有輸入錯誤！'); window.location.assign('regist.php');</script>";}
 			}else{
 				echo"<script> alert('Invalid email address'); window.location.assign('regist.php');</script>";}
 		}

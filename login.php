@@ -74,7 +74,7 @@
 	  <div class="text-center">
 		<br></br>
 		<input type="submit" class="btn btn-success btn-md centered" name="login" value="登入">
-		  <p>還沒註冊嗎? 請右上角先註冊</p>
+		  <a href="regist.php"><p>還沒註冊嗎? 請用力點我！</p></a>
 	  </div>
   </div>
  

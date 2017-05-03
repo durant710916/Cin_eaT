@@ -1,5 +1,6 @@
 <?php 
 require_once ('config.php');
+$_SESSION['testlog'] = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,5 +1,7 @@
 <?php
 require_once ('config.php');
+if(!$_SESSION['username']){
+header('location: index.php');}
 
 if(isset($_POST['login'])){
 	if(!empty($_POST['username'])&&!empty($_POST['password'])){
@@ -13,10 +15,12 @@ if(isset($_POST['login'])){
 			$rows = $query->fetchall();
 			if(count($rows)>0){
 				$_SESSION['username'] = $username;
+				$_SESSION['testlog'] = 1;
 				header('location: index_login.php');
 			}
 			else{
-				echo"<script> alert('Invalid username or password'); window.location.assign('login.php'); </script>";
+				$_SESSION['testlog'] = 0;
+				echo"<script> alert('無效的帳號或者無效的密碼，請再次確認！'); window.location.assign('login.php'); </script>";
 			}
 		}
 		catch(PDOException $e)
@@ -26,7 +30,7 @@ if(isset($_POST['login'])){
 	}
 	else{
 		echo"<script>
-			alert('Plz Enter Username And Password'); window.location.assign('index.php'); </script>";
+			alert('請輸入您的帳號和密碼！'); window.location.assign('index.php'); </script>";
 	}
 }
 

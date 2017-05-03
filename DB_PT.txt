@@ -16,8 +16,9 @@ CREATE TABLE `user` (
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
-AUTO_INCREMENT=1
+AUTO_INCREMENT=5
 ;
+
 
 
 // Store table code
@@ -30,24 +31,26 @@ CREATE TABLE `store_inform` (
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
-AUTO_INCREMENT=1
+AUTO_INCREMENT=2
 ;
+
 
 
 //COMMENT
 CREATE TABLE `comment` (
 	`id` INT(8) NOT NULL AUTO_INCREMENT,
-	`username` VARCHAR(255) NOT NULL,
+	`username` VARCHAR(255) NULL DEFAULT 'Visitor',
 	`store_id` INT(8) NULL DEFAULT NULL,
 	`comment` LONGTEXT NOT NULL,
 	PRIMARY KEY (`id`),
-	INDEX `username` (`username`),
 	INDEX `store_id` (`store_id`),
+	INDEX `username` (`username`),
 	CONSTRAINT `store_id` FOREIGN KEY (`store_id`) REFERENCES `store_inform` (`store_id`),
-	CONSTRAINT `username` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
+	CONSTRAINT `username` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON UPDATE SET NULL ON DELETE SET NULL
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+
 
 

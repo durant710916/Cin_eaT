@@ -11,7 +11,7 @@ if(!$_SESSION['username']){
   <title>Cin_eaT</title>
   <script>
 		function go(){
-			if(confirm("Assure Need Modify?")){
+			if(confirm("您確認要修改資料嗎？")){
 			return true;
 			}else{
 			return false;
@@ -62,7 +62,7 @@ if(!$_SESSION['username']){
 			</div>
 		</form>
 		</li>
-		 <li><a href="member.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Welcome&nbsp; <?php echo $_SESSION['username'];?></a></li>
+		 <li><a href="member.php"><span class="glyphicon glyphicon-user"></span>&nbsp;歡迎&nbsp; <?php echo $_SESSION['username'];?></a></li>
 		 <li><a href="index_login.php"><span class="glyphicon glyphicon-home"></span> 回首頁</a></li>
       </ul>
     </div>

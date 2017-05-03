@@ -1,5 +1,7 @@
 <?php
 require_once ('config.php');
+if(!$_SESSION['username']){
+header('location: index.php');}
 
 $username = $_SESSION['username'];
 $newname = $_POST['newname'];
@@ -21,7 +23,7 @@ if(isset($_POST['update'])){
 			if(empty($_POST['newname'])&&empty($_POST['newpassword'])&&empty($_POST['connewpassword'])&&empty($_POST['newphonenumber'])&&empty($_POST['newemail'])&&empty($_POST['newaddress'])&&empty($_POST['newsex']))
 			{
 				echo"<script type='text/javascript'>
-					var a=confirm('Assure Need Not Modify?');
+					var a=confirm('您確定不更改資料嗎？');
 					if(a==true){
 						window.location.assign('index_login.php');
 					}
@@ -35,7 +37,7 @@ if(isset($_POST['update'])){
 					$sql = "UPDATE user SET name=:newname WHERE username=:username";
 					$query = $config->prepare($sql);
 					$query->execute(array(':newname'=>$newname,':username'=>$username));
-					echo"<script> alert('Update Successfully!!'); window.location.assign('index_login.php'); </script>";
+					echo"<script> alert('更新成功！'); window.location.assign('index_login.php'); </script>";
 				}
 				if(!empty($_POST['newpassword'])&&!empty($_POST['connewpassword']))
 				{
@@ -43,14 +45,14 @@ if(isset($_POST['update'])){
 						$sql = "UPDATE user SET password=:newpassword WHERE username=:username";
 						$query = $config->prepare($sql);
 						$query->execute(array(':newpassword'=>$newpassword,':username'=>$username));
-						echo"<script> alert('Update Successfully!!'); window.location.assign('index_login.php'); </script>";
+						echo"<script> alert('更新成功！'); window.location.assign('index_login.php'); </script>";
 					}
 					else{
-						echo"<script> alert('That Input Password & Confirm Password are not the same.!'); window.location.assign('update.php'); </script>";}
+						echo"<script> alert('輸入的新密碼與確認密碼不相同，請檢查是否有輸入錯誤！'); window.location.assign('update.php'); </script>";}
 					
 				}
 				if(!empty($_POST['newemail'])){
-					if(strstr($newemail,'@')){
+						//為何一定要用 prepare 在 execute(array)?? 
 						$sql="SELECT * FROM user WHERE email=:newemail";
 						$query= $config->prepare($sql);
 						$query->execute(array(':newemail'=>$newemail));
@@ -59,39 +61,36 @@ if(isset($_POST['update'])){
 							$sql = "UPDATE user SET email=:newemail WHERE username=:username";
 							$query = $config->prepare($sql);
 							$query->execute(array(':newemail'=>$newemail,':username'=>$username));
-							echo"<script> alert('Update Successfully!!'); window.location.assign('index_login.php'); </script>";
+							echo"<script> alert('更新成功！'); window.location.assign('index_login.php'); </script>";
 						}
 						else{
-							echo"<script> alert('That email has already been used. Please enter other Emall!'); window.location.assign('update.php'); </script>";}
-					}
-					else{
-						echo"<script> alert('Invalid email address!'); window.location.assign('update.php'); </script>";}	
+							echo"<script> alert('此信箱已有人註冊過，請重新輸入有效信箱！'); window.location.assign('update.php'); </script>";}
 				}
 				if(!empty($_POST['newphonenumber']))
 				{
 					$sql = "UPDATE user SET phonenumber=:newphonenumber WHERE username=:username";
 					$query = $config->prepare($sql);
 					$query->execute(array(':newphonenumber'=>$newphonenumber,':username'=>$username));
-					echo"<script> alert('Update Successfully!!'); window.location.assign('index_login.php'); </script>";
+					echo"<script> alert('更新成功！'); window.location.assign('index_login.php'); </script>";
 				}
 				if(!empty($_POST['newaddress']))
 				{
 					$sql = "UPDATE user SET address=:newaddress WHERE username=:username";
 					$query = $config->prepare($sql);
 					$query->execute(array(':newaddress'=>$newaddress,':username'=>$username));
-					echo"<script> alert('Update Successfully!!'); window.location.assign('index_login.php'); </script>";
+					echo"<script> alert('更新成功！'); window.location.assign('index_login.php'); </script>";
 				}
 				if(!empty($_POST['newsex']))
 				{
 					$sql = "UPDATE user SET sex=:newsex WHERE username=:username";
 					$query = $config->prepare($sql);
 					$query->execute(array(':newsex'=>$newsex,':username'=>$username));
-					echo"<script> alert('Update Successfully!!'); window.location.assign('index_login.php'); </script>";
+					echo"<script> alert('更新成功！'); window.location.assign('index_login.php'); </script>";
 				}
 			}
 		}
 		else{
-			echo"<script> alert('Password is not correct!'); window.location.assign('update.php'); </script>";}
+			echo"<script> alert('如果不是本人，請勿修改個人資料！'); window.location.assign('update.php'); </script>";}
 	}
 
 ?>

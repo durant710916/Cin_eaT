@@ -1,6 +1,4 @@
-<?php 
-require_once ('config.php');
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +34,28 @@ require_once ('config.php');
             </ul>
           </li>
         </ul>
-      <a class="navbar-brand" href="index.php">Logo</a>
+<?php
+require_once ('config.php');
+if($_SESSION['testlog'])
+{
+$logo = <<<LOGO
+<a class="navbar-brand" href="index_login.php">Logo</a>
+LOGO;
+
+echo <<<LOGO
+$logo
+LOGO;
+}
+else{
+$logo = <<<LOGO
+<a class="navbar-brand" href="index.php">Logo</a>
+LOGO;
+
+echo <<<LOGO
+$logo
+LOGO;
+}
+?>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -51,8 +70,23 @@ require_once ('config.php');
 			</div>
 		</form>
 		</li>
-		<li><a href="regist.php"><span class="glyphicon glyphicon-plus"></span> 註冊</a></li>
-        <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> 登入</a></li>
+<?php
+if($_SESSION['testlog'])
+{
+
+echo '<li><a href="member.php"><span class="glyphicon glyphicon-user"></span>&nbsp;歡迎&nbsp; '. $_SESSION['username'].'</a></li>';
+echo '<li><a href="logout_f.php"><span class="glyphicon glyphicon-log-out"></span> 登出</a></li>';
+}
+else{
+$logo = <<<LOGO
+<li><a href="regist.php"><span class="glyphicon glyphicon-plus"></span> 註冊</a></li>
+<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> 登入</a></li>
+LOGO;
+echo <<<LOGO
+$logo
+LOGO;
+}
+?>
       </ul>
     </div>
   </div>
@@ -250,16 +284,17 @@ margin-top: 10px
 </div>
 <div id="content" style="background-color:#FFFFFF;height:100px;width:65%;float:left;">
 <div style="overflow-x:scroll;height:300px;weight:200px">
-
+		<h2>評論留言板</h2>
+		<hr/>
         <h3><?php $sql = "SELECT username,comment FROM comment";
 		$result = $config->query($sql);
-		if(!($row = $result->fetch(PDO::FETCH_ASSOC))){echo"嘿嘿 目前沒有評論唷 A_A!!!";}
+		if(!($row = $result->fetch(PDO::FETCH_ASSOC))){echo"嘿嘿 你眼睛業障重，目前沒有評論唷 A_A！";}
 		else{
 			$sql = "SELECT username,comment FROM comment";
 			$result = $config->query($sql);
 			while($row = $result->fetch(PDO::FETCH_ASSOC))
 			{
-				echo "$row[comment]".'<br><br>';
+				echo "$row[username]：".'&nbsp;&nbsp;'."$row[comment]".'<br>';
 			}
 		}
 		
@@ -269,6 +304,7 @@ margin-top: 10px
 </div>
 </div>
 </div>
+<!-- 少了回top-->
 </body>
 
 </html>
