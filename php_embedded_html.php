@@ -2,7 +2,7 @@
 $inputa= <<<FROM
 <form name="form1" method="post" action="">
 <p>
-  你要投的次數
+  你要投的次數是幾次ㄋ
     <input type="text" name="throws">
     例：12000
 </p>
